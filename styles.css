@@ -1,0 +1,247 @@
+:root {
+    /* Catppuccin Mocha + Material You */
+    --bg-primary: #1E1E2E;
+    --bg-secondary: rgba(30, 30, 46, 0.8);
+    --text-primary: #CDD6F4;
+    --text-secondary: #A6ADC8;
+    --accent: #F5C2E7;
+    --accent-secondary: #B4BEFE;
+    --border: rgba(205, 214, 244, 0.1);
+    --cell-hover: rgba(205, 214, 244, 0.1);
+    --shadow: rgba(0, 0, 0, 0.3);
+    --winning-line: #F5C2E7;
+    --backdrop-blur: blur(20px);
+    --surface: rgba(49, 50, 68, 0.8);
+    --surface-hover: rgba(69, 71, 90, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #181825 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 500px;
+    width: 90%;
+    padding: 2rem;
+    background: var(--surface);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-info {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.difficulty-selector select {
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    transition: all 0.3s ease;
+}
+
+.difficulty-selector select:hover {
+    background: var(--surface-hover);
+}
+
+.difficulty-selector select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(245, 194, 231, 0.2);
+}
+
+.status {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: -0.3px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding: 0.5rem;
+    background: var(--surface);
+    border-radius: 16px;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    line-height: 1;
+    text-align: center;
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+.cell:hover {
+    background: var(--surface-hover);
+    transform: scale(1.02);
+}
+
+.cell.x, .cell.o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cell.x {
+    color: var(--accent);
+}
+
+.cell.o {
+    color: var(--accent-secondary);
+}
+
+.cell.winning {
+    animation: winning-cell 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.winning-line {
+    position: absolute;
+    background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    transform-origin: center;
+    border-radius: 2px;
+}
+
+.winning-line.active {
+    opacity: 1;
+}
+
+/* Winning line positions */
+.winning-line.horizontal {
+    height: 4px;
+    width: 80%;
+    left: 10%;
+}
+
+.winning-line.vertical {
+    width: 4px;
+    height: 80%;
+    top: 10%;
+}
+
+.winning-line.diagonal {
+    width: 113.14%;
+    height: 4px;
+    left: -6.57%;
+    top: 50%;
+}
+
+.winning-line.diagonal.reverse {
+    transform: rotate(-45deg);
+}
+
+.winning-line.diagonal.forward {
+    transform: rotate(45deg);
+}
+
+@keyframes winning-cell {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.restart-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.3px;
+}
+
+.restart-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 194, 231, 0.3);
+}
+
+.restart-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .cell {
+        font-size: 2rem;
+    }
+} 

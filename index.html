@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cat Tac Toe</h1>
+        </header>
+
+        <div class="game-info">
+            <div class="difficulty-selector">
+                <select id="difficulty">
+                    <option value="easy">Easy Peasy (Bot's Napping)</option>
+                    <option value="medium">Medium Rare (Now It's Paying Attention)</option>
+                    <option value="hard">Hard Core (Bot's in Beast Mode)</option>
+                </select>
+            </div>
+            <div class="status" id="status">Your turn!</div>
+        </div>
+
+        <div class="game-board" id="board">
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="winning-line"></div>
+        </div>
+
+        <button id="restartButton" class="restart-button">New Game</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
