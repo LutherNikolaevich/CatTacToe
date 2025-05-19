@@ -5,7 +5,6 @@ A modern, responsive Tic Tac Toe game featuring the Catppuccin color scheme and 
 ## Features
 
 - 🎮 Classic Tic Tac Toe gameplay
-- 🌓 Light/Dark mode toggle
 - 🤖 Three AI difficulty levels:
   - Easy Peasy
   - Medium Rare
